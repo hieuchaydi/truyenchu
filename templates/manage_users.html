@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<h2>Manage Users</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ "Active" if user.is_active else "Deactivated" }}</td>
+            <td>
+                {% if user.is_active %}
+                    <a href="{{ url_for('deactivate_user', user_id=user.user_id) }}">Deactivate</a>
+                {% else %}
+                    <a href="{{ url_for('activate_user', user_id=user.user_id) }}">Activate</a>
+                {% endif %}
+                <a href="{{ url_for('delete_user', user_id=user.user_id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

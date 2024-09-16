@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Truyện Chữ {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">trang chủ</a></li>
+                {% if 'user' in session %}
+                    <li><a href="{{ url_for('user') }}">tài khoản</a></li>
+                    <li><a href="{{ url_for('blog') }}">đăng bài</a></li>
+                    {% if session.get('user') == 'admin@example.com' %}
+                        <li><a href="{{ url_for('admin_page') }}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('logout') }}">đăng xuất</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">đăng nhập</a></li>
+                    <li><a href="{{ url_for('register') }}">đăng ký</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>theo dõi: <a href="https://www.facebook.com/cos.204" target="_blank">Facebook</a> liên hệ: <a href="mailto:n.van.hieu2022@gamil.com">Gmail</a>.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng truyện mới{% endblock %}
+
+{% block content %}
+<h2>Đăng Truyện</h2>
+
+<form method="POST" action="{{ url_for('blog') }}">
+    <label for="title">Tên truyện:</label>
+    <input type="text" name="title" id="title" required>
+
+    <label for="content">Nội Dung:</label>
+    <textarea name="content" id="content" required></textarea>
+
+    <button type="submit">Đăng</button>
+</form>
+
+<a href="{{ url_for('home') }}">Trở lại </a>
+{% endblock %}

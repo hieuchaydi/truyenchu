@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Gửi tin nhắn{% endblock %}
+
+{% block content %}
+<h2>Gửi tin nhắn</h2>
+<form method="POST" action="{{ url_for('send_message') }}">
+    <label for="recipient">Người nhận (Email):</label>
+    <input type="email" name="recipient" id="recipient" required>
+
+    <label for="content">Nội dung tin nhắn:</label>
+    <textarea name="content" id="content" required></textarea>
+
+    <button type="submit">Gửi</button>
+</form>
+{% endblock %}

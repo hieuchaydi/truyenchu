@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}người dùng{% endblock %}
+
+{% block content %}
+<h2>xin chào, {{ username }}</h2>
+
+<ul>
+    <li><a href="{{ url_for('blog') }}">Thêm truyện</a></li>
+    <li><a href="{{ url_for('messages') }}">Xem tin nhắn</a></li>
+    <li><a href="{{ url_for('send_message') }}">Gửi tin nhắn</a></li>
+    <li><a href="{{ url_for('contact') }}">Liên hệ hỗ trợ</a></li>
+    <li><a href="{{ url_for('logout') }}">Đăng xuất</a></li>
+</ul>
+
+{% endblock %}

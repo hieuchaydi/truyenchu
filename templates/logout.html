@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+    <h1>đăng xuất</h1>
+    
+    <a href="{{ url_for('login') }}">đăng nhập</a>
+    <a href="{{ url_for('home') }}">quay lại trang chủ</a>
+{% endblock %}

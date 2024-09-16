@@ -1,0 +1,203 @@
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #181818;
+    color: #eaeaea;
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    line-height: 1.7;
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #222;
+    color: #ffffff;
+    padding: clamp(0.8rem, 2vw, 1.5rem);
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Story title styling */
+.story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 600;
+    color: #ff8a65;
+    text-align: center;
+    max-width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+/* Navigation bar */
+/* Navigation bar */
+nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: #222;
+    padding: clamp(0.5rem, 2vw, 0.8rem);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centering the items */
+    gap: clamp(0.5rem, 1.5vw, 0.8rem); /* Reduced gap */
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    padding: 0.5rem 1rem; /* Reduced padding */
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    background-color: #333;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: #ff8a65;
+    color: #fff;
+}
+
+
+main {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    max-width: 1100px;
+    margin: auto;
+    word-wrap: break-word;
+    line-height: 1.75;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #222;
+    color: #ffffff;
+}
+
+/* Form styling */
+form {
+    background-color: #202020;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    border: 1px solid #2a2a2a;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: clamp(1rem, 2.2vw, 1.1rem);
+    color: #eaeaea;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 6px;
+    background-color: #2d2d2d;
+    color: #eaeaea;
+    font-size: clamp(1rem, 2.2vw, 1rem);
+    margin-bottom: 1.5rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    font-weight: bold;
+    color: #ff8a65;
+}
+
+h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2rem);
+    font-weight: 600;
+}
+
+/* Story and comment section */
+.story, .comment {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 1.5rem;
+    border: 1px solid #2a2a2a;
+    max-width: 100%;
+    margin: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.comment p {
+    margin: 0;
+    font-size: clamp(1rem, 2.2vw, 1rem);
+}
+
+.comment strong {
+    color: #ff8a65;
+}
+
+a {
+    color: #ff8a65;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffb395;
+    text-decoration: underline;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th, table td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+    color: #eaeaea;
+}
+
+table th {
+    background-color: #2a2a2a;
+}
+
+table tr:nth-child(even) {
+    background-color: #252525;
+}
+
+table tr:hover {
+    background-color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    nav ul {
+        gap: 0.6rem;
+    }
+
+    form, .story, .comment {
+        padding: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.9rem;
+    }
+}

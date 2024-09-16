@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>đăng ký</h1>
+<form method="POST">
+    <label for="name">tên:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">mật khẩu:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">đăng ký</button>
+</form>
+{% endblock %}

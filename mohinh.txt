@@ -1,0 +1,23 @@
+instance/
+    user.db
+static/
+    script.js
+    style.css
+
+templates/
+    admin.html
+    base.html
+    blog.html
+    contact.html
+    create_story.html
+    edit_story.html
+    error.html
+    home.html
+    login.html
+    logout.html
+    manage_users.html
+    register.html
+    story_details.html
+    user.html
+
+app.py
