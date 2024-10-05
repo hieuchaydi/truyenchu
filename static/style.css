@@ -1,203 +1,523 @@
-/* Base styles */
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #181818;
-    color: #eaeaea;
-    font-size: clamp(1rem, 1.2vw, 1.1rem);
-    line-height: 1.7;
-    transition: all 0.3s ease;
-    overflow-x: hidden;
-}
-
-header {
-    background-color: #222;
-    color: #ffffff;
-    padding: clamp(0.8rem, 2vw, 1.5rem);
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: sticky;
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
     top: 0;
-    z-index: 1000;
-}
-
-/* Story title styling */
-.story-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 5vw, 2.4rem);
-    font-weight: 600;
-    color: #ff8a65;
-    text-align: center;
-    max-width: 100%;
-    margin-bottom: 1.2rem;
-}
-
-/* Navigation bar */
-/* Navigation bar */
-nav {
-    position: sticky;
-    bottom: 0;
     width: 100%;
-    background-color: #222;
-    padding: clamp(0.5rem, 2vw, 0.8rem);
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center; /* Centering the items */
-    gap: clamp(0.5rem, 1.5vw, 0.8rem); /* Reduced gap */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    padding: 0.5rem 1rem; /* Reduced padding */
-    border-radius: 20px;
-    transition: background-color 0.3s ease;
+body.dark-mode .modal-content {
     background-color: #333;
-    white-space: nowrap;
 }
 
-nav ul li a:hover {
-    background-color: #ff8a65;
+.modal-open {
+    display: flex;
+}
+
+.modal-header, .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.modal-footer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.modal-footer button:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .modal-footer button {
+    background-color: #444;
+}
+
+body.dark-mode .modal-footer button:hover {
+    background-color: #666;
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Dark Mode Tooltip */
+body.dark-mode .tooltip .tooltiptext {
+    background-color: #555;
+}
+
+/* Alert Box */
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+}
+
+.alert.info {
+    background-color: #2196F3;
+}
+
+.alert.warning {
+    background-color: #ff9800;
+}
+
+/* Close Button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+/* Toast Notification */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+body.dark-mode .toast {
+    background-color: #555;
+}
+
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+}
+
+/* Avatar Styles */
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Accordion Styles */
+.accordion {
+    background-color: #f1f1f1;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: background-color 0.4s ease;
+}
+
+body.dark-mode .accordion {
+    background-color: #333;
+    color: #f1f1f1;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+body.dark-mode .accordion.active, body.dark-mode .accordion:hover {
+    background-color: #444;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+body.dark-mode .accordion:after {
+    color: #ccc;
+}
+
+.accordion.active:after {
+    content: "\2212";
+}
+
+/* Panel for accordion */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+body.dark-mode .panel {
+    background-color: #222;
+}
+
+/* Card Styles */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 20px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .card {
+    border-color: #444;
+    background-color: #222;
+}
+
+/* Floating Action Button (FAB) */
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+body.dark-mode .fab {
+    background-color: #0056b3;
+}
+
+.fab:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.badge-primary {
+    background-color: #007bff;
     color: #fff;
 }
 
-
-main {
-    padding: clamp(1.5rem, 3vw, 2rem);
-    max-width: 1100px;
-    margin: auto;
-    word-wrap: break-word;
-    line-height: 1.75;
+.badge-secondary {
+    background-color: #6c757d;
+    color: #fff;
 }
 
-footer {
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    color: #007bff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination a:hover {
+    background-color: #e9ecef;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+body.dark-mode .pagination a:hover {
+    background-color: #444;
+}
+
+body.dark-mode .pagination .active a {
+    background-color: #0056b3;
+}
+
+/* Divider Styles */
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+body.dark-mode .divider {
+    background-color: #444;
+}
+/* User Page Styles */
+.user-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-page h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
     text-align: center;
-    padding: 1rem;
-    background-color: #222;
-    color: #ffffff;
 }
 
-/* Form styling */
-form {
-    background-color: #202020;
-    padding: clamp(1.2rem, 3vw, 1.8rem);
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-    border: 1px solid #2a2a2a;
+.user-options {
+    list-style-type: none;
+    padding: 0;
 }
 
-form label {
+.user-options li {
+    margin-bottom: 15px;
+}
+
+.user-options li a {
     display: block;
-    margin-bottom: 0.6rem;
-    font-size: clamp(1rem, 2.2vw, 1.1rem);
-    color: #eaeaea;
+    padding: 15px;
+    background-color: #f8f9fa;
+    color: #212529;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-form input, form textarea {
+.user-options li a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+body.dark-mode .user-options li a {
+    background-color: #333;
+    color: #f8f9fa;
+}
+
+body.dark-mode .user-options li a:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+/* General Form Styles */
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+body.dark-mode .form-container {
+    background-color: #333;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+body.dark-mode .form-group label {
+    color: #f1f1f1;
+}
+
+.form-group input {
     width: 100%;
-    padding: 0.9rem;
-    border-radius: 6px;
-    background-color: #2d2d2d;
-    color: #eaeaea;
-    font-size: clamp(1rem, 2.2vw, 1rem);
-    margin-bottom: 1.5rem;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
 }
 
-/* Headings */
-h1, h2, h3 {
-    color: #ffffff;
-    margin-bottom: 1rem;
+body.dark-mode .form-group input {
+    background-color: #555;
+    border: 1px solid #444;
+    color: #fff;
 }
 
-h1 {
-    font-size: clamp(1.9rem, 4vw, 2.5rem);
-    font-weight: bold;
-    color: #ff8a65;
+.form-group input:focus {
+    border-color: #007bff;
 }
 
-h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2rem);
-    font-weight: 600;
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
-/* Story and comment section */
-.story, .comment {
-    background-color: #1f1f1f;
-    border-radius: 10px;
-    padding: clamp(1.5rem, 3vw, 2rem);
-    margin-bottom: 1.5rem;
-    border: 1px solid #2a2a2a;
-    max-width: 100%;
-    margin: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+body.dark-mode .form-group button {
+    background-color: #444;
 }
 
-.comment p {
-    margin: 0;
-    font-size: clamp(1rem, 2.2vw, 1rem);
+.form-group button:hover {
+    background-color: #0056b3;
 }
 
-.comment strong {
-    color: #ff8a65;
+body.dark-mode .form-group button:hover {
+    background-color: #666;
 }
 
-a {
-    color: #ff8a65;
+/* Links for login/register */
+.form-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-link a {
+    color: #007bff;
     text-decoration: none;
 }
 
-a:hover {
-    color: #ffb395;
+.form-link a:hover {
     text-decoration: underline;
 }
 
-/* Table styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+body.dark-mode .form-link a {
+    color: #ffc107;
 }
 
-table th, table td {
-    border: 1px solid #333;
-    padding: 10px;
-    text-align: left;
-    color: #eaeaea;
-}
-
-table th {
-    background-color: #2a2a2a;
-}
-
-table tr:nth-child(even) {
-    background-color: #252525;
-}
-
-table tr:hover {
-    background-color: #333;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    nav ul {
-        gap: 0.6rem;
-    }
-
-    form, .story, .comment {
-        padding: 1.2rem;
-    }
-
-    h1 {
-        font-size: 1.9rem;
-    }
+body.dark-mode .form-link a:hover {
+    color: #fff;
 }

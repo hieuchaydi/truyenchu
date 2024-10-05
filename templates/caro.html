@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caro 5x5</title>
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    h3 {
+        margin-bottom: 20px;
+    }
+    
+    #tic-tac-toe {
+        text-align: center;
+        margin: 20px auto;
+    }
+    
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+    
+    .cell {
+        width: 60px;
+        height: 60px;
+        border: 1px solid #fff;
+        text-align: center;
+        font-size: 24px;
+        cursor: pointer;
+        background-color: #1e1e1e;
+        transition: background-color 0.3s;
+    }
+    
+    .cell:hover {
+        background-color: #333;
+    }
+    
+    #game-status {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    #restart-btn {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    #restart-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    #mode-selection {
+        margin-bottom: 20px;
+    }
+    
+    #start-btn {
+        padding: 10px 20px;
+        background-color: #28a745;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    #start-btn:hover {
+        background-color: #218838;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <h3>Nguyễn Văn Hiếu </h3>
+    <div id="mode-selection">
+        <button id="two-player-btn">Chơi 2 người</button>
+        <button id="vs-ai-btn">Chơi với máy</button>
+    </div>
+
+    <div id="tic-tac-toe" class="hidden">
+        <table>
+            <!-- Tạo bảng 5x5 -->
+            <tr><td class="cell" data-cell="0"></td><td class="cell" data-cell="1"></td><td class="cell" data-cell="2"></td><td class="cell" data-cell="3"></td><td class="cell" data-cell="4"></td></tr>
+            <tr><td class="cell" data-cell="5"></td><td class="cell" data-cell="6"></td><td class="cell" data-cell="7"></td><td class="cell" data-cell="8"></td><td class="cell" data-cell="9"></td></tr>
+            <tr><td class="cell" data-cell="10"></td><td class="cell" data-cell="11"></td><td class="cell" data-cell="12"></td><td class="cell" data-cell="13"></td><td class="cell" data-cell="14"></td></tr>
+            <tr><td class="cell" data-cell="15"></td><td class="cell" data-cell="16"></td><td class="cell" data-cell="17"></td><td class="cell" data-cell="18"></td><td class="cell" data-cell="19"></td></tr>
+            <tr><td class="cell" data-cell="20"></td><td class="cell" data-cell="21"></td><td class="cell" data-cell="22"></td><td class="cell" data-cell="23"></td><td class="cell" data-cell="24"></td></tr>
+        </table>
+        <h4 id="game-status"></h4>
+        <button id="restart-btn">Chơi lại</button>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('.cell');
+        const gameStatus = document.getElementById('game-status');
+        const restartBtn = document.getElementById('restart-btn');
+        const ticTacToe = document.getElementById('tic-tac-toe');
+        const modeSelection = document.getElementById('mode-selection');
+        let isTwoPlayer = false;
+        let board = Array(5).fill(null).map(() => Array(5).fill(0));
+        let currentPlayer = 1; // 1: Player, 2: AI
+    
+        document.getElementById('two-player-btn').addEventListener('click', () => {
+            isTwoPlayer = true;
+            startGame();
+        });
+    
+        document.getElementById('vs-ai-btn').addEventListener('click', () => {
+            isTwoPlayer = false;
+            startGame();
+        });
+    
+        function startGame() {
+            board = Array(5).fill(null).map(() => Array(5).fill(0));
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.style.pointerEvents = 'auto';
+            });
+            gameStatus.textContent = '';
+            modeSelection.classList.add('hidden');
+            ticTacToe.classList.remove('hidden');
+            currentPlayer = 1;
+        }
+    
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const cellIndex = cell.getAttribute('data-cell');
+                const row = Math.floor(cellIndex / 5);
+                const col = cellIndex % 5;
+    
+                if (board[row][col] === 0) {
+                    board[row][col] = currentPlayer;
+                    cell.textContent = currentPlayer === 1 ? 'X' : 'O';
+                    if (checkWinner() === 1) {
+                        gameStatus.textContent = "X thắng";
+                        disableCells();
+                    } else if (checkWinner() === 2) {
+                        gameStatus.textContent = isTwoPlayer ? "0 thắng" : "bạn thua";
+                        disableCells();
+                    } else if (isBoardFull()) {
+                        gameStatus.textContent = "hòa!";
+                    } else {
+                        currentPlayer = isTwoPlayer ? (currentPlayer === 1 ? 2 : 1) : 2;
+                        if (!isTwoPlayer && currentPlayer === 2) {
+                            aiTurn();
+                        }
+                    }
+                }
+            });
+        });
+    
+        restartBtn.addEventListener('click', () => {
+            modeSelection.classList.remove('hidden');
+            ticTacToe.classList.add('hidden');
+        });
+    
+        function aiTurn() {
+            const move = findBestMove(board);
+            if (move) {
+                const [row, col] = move;
+                board[row][col] = currentPlayer;
+                const cellIndex = row * 5 + col;
+                const cell = document.querySelector(`.cell[data-cell="${cellIndex}"]`);
+                cell.textContent = 'O';
+    
+                if (checkWinner() === 2) {
+                    gameStatus.textContent = "bạn thua";
+                    disableCells();
+                } else if (isBoardFull()) {
+                    gameStatus.textContent = "hòa!";
+                } else {
+                    currentPlayer = 1;
+                }
+            }
+        }
+    
+        function disableCells() {
+            cells.forEach(cell => {
+                cell.style.pointerEvents = 'none';
+            });
+        }
+    
+        function isBoardFull() {
+            return board.every(row => row.every(cell => cell !== 0));
+        }
+    
+        function checkWinner() {
+            // Check rows and columns
+            for (let i = 0; i < 5; i++) {
+                if (board[i][0] !== 0 && board[i].every(cell => cell === board[i][0])) {
+                    return board[i][0];
+                }
+                if (board[0][i] !== 0 && board.every(row => row[i] === board[0][i])) {
+                    return board[0][i];
+                }
+            }
+    
+            // Check diagonals
+            if (board[0][0] !== 0 && board.every((row, idx) => row[idx] === board[0][0])) {
+                return board[0][0];
+            }
+    
+            if (board[0][4] !== 0 && board.every((row, idx) => row[4 - idx] === board[0][4])) {
+                return board[0][4];
+            }
+    
+            return 0;
+        }
+    
+        // Implement Minimax with Alpha-Beta Pruning for better performance
+        function findBestMove(board) {
+            let bestScore = -Infinity;
+            let move;
+    
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    if (board[i][j] === 0) {
+                        board[i][j] = 2; // AI move
+                        let score = minimax(board, 0, false, -Infinity, Infinity);
+                        board[i][j] = 0; // Undo move
+                        if (score > bestScore) {
+                            bestScore = score;
+                            move = [i, j];
+                        }
+                    }
+                }
+            }
+            return move;
+        }
+    
+        function minimax(board, depth, isMaximizing, alpha, beta) {
+            const scores = { 1: -1, 2: 1, 0: 0 }; // Player 1, AI, Tie
+    
+            const winner = checkWinner();
+            if (winner !== 0) return scores[winner]; // Return score if there's a winner
+            if (isBoardFull()) return 0; // Tie
+    
+            if (depth > 3) return 0; // Limit depth to avoid long computations
+    
+            if (isMaximizing) {
+                let maxEval = -Infinity;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (board[i][j] === 0) {
+                            board[i][j] = 2; // AI move
+                            let eval = minimax(board, depth + 1, false, alpha, beta);
+                            board[i][j] = 0; // Undo move
+                            maxEval = Math.max(eval, maxEval);
+                            alpha = Math.max(alpha, eval);
+                            if (beta <= alpha) return maxEval;
+                        }
+                    }
+                }
+                return maxEval;
+            } else {
+                let minEval = Infinity;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (board[i][j] === 0) {
+                            board[i][j] = 1; // Player move
+                            let eval = minimax(board, depth + 1, true, alpha, beta);
+                            board[i][j] = 0; // Undo move
+                            minEval = Math.min(eval, minEval);
+                            beta = Math.min(beta, eval);
+                            if (beta <= alpha) return minEval;
+                        }
+                    }
+                }
+                return minEval;
+            }
+        }
+    </script>
+    
+</body>
+</html>

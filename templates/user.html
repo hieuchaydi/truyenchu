@@ -11,6 +11,13 @@
     <li><a href="{{ url_for('send_message') }}">Gửi tin nhắn</a></li>
     <li><a href="{{ url_for('contact') }}">Liên hệ hỗ trợ</a></li>
     <li><a href="{{ url_for('logout') }}">Đăng xuất</a></li>
+    <li><a href="{{ url_for('caro') }}">game</a></li>
+
 </ul>
 
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

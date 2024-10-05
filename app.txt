@@ -253,7 +253,7 @@ def create_admin():
         return redirect(url_for("login"))
     
     email = "admin@example.com"
-    password = "adminpassword"
+    password = "1"
     if User.query.filter_by(email=email).first():
         flash("Admin already exists.", "warning")
         return redirect(url_for("admin_page"))
@@ -267,6 +267,10 @@ def create_admin():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+@app.route("/game")
+def game():
+    return render_template("game.html")
 
 @app.errorhandler(HTTPException)
 def handle_exception(e):
@@ -310,3 +314,4 @@ if __name__ == "__main__":
         with app.app_context():
             db.create_all()  # Create all tables
     app.run(debug=True)
+    

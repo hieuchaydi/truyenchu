@@ -1,13 +1,33 @@
 {% extends "base.html" %}
+
+{% block title %}Đăng ký{% endblock %}
+
 {% block content %}
-<h1>đăng ký</h1>
-<form method="POST">
-    <label for="name">tên:</label>
-    <input type="text" id="name" name="name" required>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">mật khẩu:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">đăng ký</button>
-</form>
+<div class="form-container">
+    <h2>Đăng ký</h2>
+    <form action="{{ url_for('register') }}" method="POST">
+        <div class="form-group">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Xác nhận mật khẩu</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit">Đăng ký</button>
+        </div>
+    </form>
+    <div class="form-link">
+        <p>Đã có tài khoản? <a href="{{ url_for('login') }}">Đăng nhập ngay</a></p>
+    </div>
+</div>
 {% endblock %}

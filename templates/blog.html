@@ -1,11 +1,18 @@
 {% extends "base.html" %}
+{% block title %}Đăng bài{% endblock %}
 {% block content %}
-<h1>Truyện :</h1>
-<form method="POST">
-    <label for="title">Tên truyện:</label>
-    <input type="text" id="title" name="title" required>
-    <label for="content">Nội dung:</label>
-    <textarea id="content" name="content" required></textarea>
-    <button type="submit">Đăng</button>
-</form>
+    <div class="story-form">
+        <h2 class="text-center">Đăng bài mới</h2>
+        <form action="{{ url_for('blog') }}" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Tiêu đề</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Nội dung</label>
+                <textarea class="form-control" id="content" name="content" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng</button>
+        </form>
+    </div>
 {% endblock %}

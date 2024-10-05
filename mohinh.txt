@@ -1,23 +1,33 @@
-instance/
-    user.db
-static/
-    script.js
-    style.css
+truyenchu/
+│
+├── app.py
+│
+│
+├── instance/
+│   └── user.db
+│
+├── static/
+│   ├── script.js
+│   └── style.css
+│
+├── ├emplates/
+        admin.html
+        base.html
+        blog.html
+        contact.html
+        create_story.html
+        edit_story.html
+        error.html
+        home.html
+        login.html
+        logout.html
+        manage_users.html
+        register.html
+        story_details.html
+        user.html                  # Các template HTML
 
-templates/
-    admin.html
-    base.html
-    blog.html
-    contact.html
-    create_story.html
-    edit_story.html
-    error.html
-    home.html
-    login.html
-    logout.html
-    manage_users.html
-    register.html
-    story_details.html
-    user.html
+│
+├── requirements.txt
+├── runtime.txt
+└── .gitignore
 
-app.py

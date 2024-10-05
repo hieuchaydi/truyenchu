@@ -1,38 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Truyện Chữ {% endblock %}</title>
+    <title>{% block title %}Truyện Chữ{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Your custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+            padding-right: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212529;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            background-color: #ffc107;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #e0a800;
+        }
+
+        /* Main Content */
+        main {
+            min-height: 70vh;
+            padding-top: 2rem;
+        }
+    </style>
 </head>
+
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">trang chủ</a></li>
-                {% if 'user' in session %}
-                    <li><a href="{{ url_for('user') }}">tài khoản</a></li>
-                    <li><a href="{{ url_for('blog') }}">đăng bài</a></li>
-                    {% if session.get('user') == 'admin@example.com' %}
-                        <li><a href="{{ url_for('admin_page') }}">Admin</a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('logout') }}">đăng xuất</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('login') }}">đăng nhập</a></li>
-                    <li><a href="{{ url_for('register') }}">đăng ký</a></li>
-                {% endif %}
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('home') }}">Truyện Chữ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home') }}">Trang chủ</a>
+                        </li>
+                        {% if 'user' in session %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('user') }}">Tài khoản</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('blog') }}">Đăng bài</a>
+                        </li>
+                        {% if session.get('user') == 'admin@example.com' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin_page') }}">Admin</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-custom text-dark" href="{{ url_for('logout') }}">Đăng xuất</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">Đăng ký</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main>
+    <main class="container mt-4">
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>theo dõi: <a href="https://www.facebook.com/cos.204" target="_blank">Facebook</a> liên hệ: <a href="mailto:n.van.hieu2022@gamil.com">Gmail</a>.</p>
+    <footer class="text-light text-center py-4">
+        <p>
+            <a href="https://www.facebook.com/cos.204" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </p>
     </footer>
+    
+    
+
+    <!-- Bootstrap 5 JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
