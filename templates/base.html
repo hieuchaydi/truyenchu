@@ -100,7 +100,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('blog') }}">Đăng bài</a>
                         </li>
-                        {% if session.get('user') == 'n.van.hieu1819@gmail.com' %}
+                        {% if session.get('user') == 'admin@gmail.com' %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('admin_page') }}">Admin</a>
                         </li>
