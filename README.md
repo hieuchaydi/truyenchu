@@ -112,3 +112,4 @@ def create_admin():
     return redirect(url_for("admin_page"))
 
 
+truyenchu.onrender.com
