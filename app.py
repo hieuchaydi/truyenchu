@@ -87,7 +87,7 @@ def login():
         if user and check_password_hash(user.password_hash, password) and user.is_active:
             session.permanent = True  # Set session to permanent
             session["user"] = user.email  # Store email in session
-            session["is_admin"] = (user.email == "admin@example.com")  # Store admin status based on email
+            session["is_admin"] = (user.email == "n.van.hieu1819@gmail.com")  # Store admin status based on email
             return redirect(url_for("user"))
 
         flash("Invalid credentials or account is deactivated", "danger")
@@ -273,8 +273,8 @@ def create_admin():
         flash("You need to be an admin to create another admin.", "danger")
         return redirect(url_for("login"))
 
-    email = "admin@example.com"
-    password = "1"  # Mật khẩu yếu, nên thay đổi
+    email = "n.van.hieu1819@gmail.com"
+    password = "hieu@@@2004"  # Mật khẩu yếu, nên thay đổi
 
     if User.query.filter_by(email=email).first():
         flash("Admin already exists.", "warning")
