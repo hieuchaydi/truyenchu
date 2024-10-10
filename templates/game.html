@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Caro</h3>
+<div id="tic-tac-toe">
+    <table>
+        <tr>
+            <td class="cell" data-cell="0"></td>
+            <td class="cell" data-cell="1"></td>
+            <td class="cell" data-cell="2"></td>
+        </tr>
+        <tr>
+            <td class="cell" data-cell="3"></td>
+            <td class="cell" data-cell="4"></td>
+            <td class="cell" data-cell="5"></td>
+        </tr>
+        <tr>
+            <td class="cell" data-cell="6"></td>
+            <td class="cell" data-cell="7"></td>
+            <td class="cell" data-cell="8"></td>
+        </tr>
+    </table>
+    <h4 id="game-status"></h4>
+    <button id="restart-btn">Chơi lại</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
