@@ -25,8 +25,4 @@ zipp==3.9.0
 gunicorn==20.1.0
 Flask-Cors==3.0.10          # Để hỗ trợ CORS (Cross-Origin Resource Sharing)
 Flask-Migrate==3.1.0       # Để quản lý di chuyển cơ sở dữ liệu
-Flask-RESTful==0.3.9       # Để xây dựng API RESTful dễ dàng
-Flask-Mail==^0.9.1         # Để gửi email
-Flask-DebugToolbar==0.14.0  # Để gỡ lỗi dễ dàng trong phát triển
-requests==2.28.1            # Để gửi yêu cầu HTTP
-python-dotenv==0.21.0      # Để quản lý biến môi trường từ tệp .env
+
