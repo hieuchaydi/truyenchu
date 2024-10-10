@@ -109,7 +109,4 @@ def create_admin():
     db.session.add(admin_user)
     db.session.commit()
     flash("Admin created successfully!", "success")
-    return redirect(url_for("admin_page"))
-
-
-truyenchu.onrender.com
+[ link web Truyện Chu](https://truyenchu.onrender.com)
