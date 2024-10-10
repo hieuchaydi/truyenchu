@@ -15,15 +15,14 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 # User model
+# User model
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password_hash = db.Column(db.String(128), nullable=False)  # Password hash
     is_active = db.Column(db.Boolean, default=True)  # Account status
 
-    def __init__(self, name, email, password):
-        self.name = name
+    def __init__(self, email, password):
         self.email = email
         self.password_hash = generate_password_hash(password)  # Hash password on creation
 
@@ -98,21 +97,23 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        name = request.form.get("name")
         email = request.form.get("email")
         password = request.form.get("password")
 
+        # Kiểm tra xem email đã được đăng ký chưa
         if User.query.filter_by(email=email).first():
             flash("Email already registered.", "warning")
             return redirect(url_for("register"))
 
-        new_user = User(name=name, email=email, password=password)
+        # Tạo người dùng mới mà không cần trường name
+        new_user = User(email=email, password=password)  # Chỉ cần email và password
         db.session.add(new_user)
         db.session.commit()
         flash("Registration successful! Please login.", "success")
         return redirect(url_for("login"))
 
     return render_template("register.html")
+
 
 @app.route("/user")
 def user():
