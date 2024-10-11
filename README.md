@@ -28,4 +28,4 @@ To run this project, you'll need the following:
    git clone https://github.com/hieuchaydi/truyenchu.git
    cd truyenchu
 [ link website Truyện Chu](https://truyenchu.onrender.com)(https://truyenchu.onrender.com)
-run project python app.py and Open your browser and go to :http://127.0.0.1:5000
+run project: python app.py and Open your browser and go to :http://127.0.0.1:5000
