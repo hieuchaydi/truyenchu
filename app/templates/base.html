@@ -41,6 +41,7 @@
                         <!-- Logged-in user links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('main.user') }}">Tài khoản</a>
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('main.blog') }}">Đăng bài</a>
@@ -53,6 +54,8 @@
                         {% endif %}
                         <li class="nav-item">
                             <a class="nav-link btn btn-custom text-dark" href="{{ url_for('main.logout') }}">Đăng xuất</a>
+                            
+
                         </li>
                         {% else %}
                         <!-- Guest links -->
@@ -90,6 +93,7 @@
             <a href="https://www.facebook.com/cos.204" target="_blank">
                 <i class="fab fa-facebook"></i> 
             </a>
+            <button id="toggle-dark-mode">Chế Độ Tối</button>
         </p>
     </footer>
 

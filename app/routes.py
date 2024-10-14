@@ -34,7 +34,6 @@ def login():
 
     return render_template("login.html") # Updated to use the Blueprint prefix
 
-    return render_template("login.html")
 
 # Registration Route
 @main.route("/register", methods=["GET", "POST"])
@@ -45,14 +44,14 @@ def register():
 
         if User.query.filter_by(email=email).first():
             flash("Email đã được đăng ký.", "warning")
-            return redirect(url_for("main.register"))  # Sử dụng prefix Blueprint
+            return redirect(url_for("main.register"))
 
-        # Mã hóa mật khẩu
-        new_user = User(email=email, password=password)  # Truyền password trực tiếp
+        # Mã hóa mật khẩu trước khi lưu
+        new_user = User(email=email, password_hash=generate_password_hash(password, method='sha512'))
         db.session.add(new_user)
         db.session.commit()
         flash("Đăng ký thành công! Vui lòng đăng nhập.", "success")
-        return redirect(url_for("main.login"))  # Sử dụng prefix Blueprint
+        return redirect(url_for("main.login"))
 
     return render_template("register.html")
 # User Dashboard Route
@@ -230,7 +229,7 @@ def create_admin():
         flash("Admin already exists.", "warning")
         return redirect(url_for("admin.admin_page"))
 
-    admin_user = User(email=email, password=generate_password_hash(password), is_admin=True)
+    admin_user = User(email=email, password_hash=generate_password_hash(password, method='sha512'))
     db.session.add(admin_user)
     db.session.commit()
     flash("Admin created successfully!", "success")
@@ -342,7 +341,7 @@ def change_password():
 
     return render_template('change_password.html')
 
-    return render_template('change_password.html')
+
 if __name__ == "__main__":
     if not path.exists("user.db"):
         with app.app_context():
