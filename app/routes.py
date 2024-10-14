@@ -244,7 +244,7 @@ def login():
         password = request.form.get("password")
         user = User.query.filter_by(email=email).first()
 
-        if user and check_password_hash(user.password, password):
+        if user and check_password_hash(user.password_hash, password):  # Sửa ở đây
             session["user"] = user.email
             session["is_admin"] = user.is_admin
             flash("Logged in successfully.", "success")
@@ -253,6 +253,7 @@ def login():
         flash("Login failed. Check your email and password.", "danger")
 
     return render_template("login.html")
+
 
 # Route đăng xuất
 @admin.route("/logout")
