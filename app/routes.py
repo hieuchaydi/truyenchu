@@ -47,7 +47,7 @@ def register():
             return redirect(url_for("main.register"))
 
         # Mã hóa mật khẩu trước khi lưu
-        new_user = User(email=email, password_hash=generate_password_hash(password, method='sha512'))
+        new_user = User(email=email, password_hash=generate_password_hash(password))
         db.session.add(new_user)
         db.session.commit()
         flash("Đăng ký thành công! Vui lòng đăng nhập.", "success")
@@ -229,7 +229,7 @@ def create_admin():
         flash("Admin already exists.", "warning")
         return redirect(url_for("admin.admin_page"))
 
-    admin_user = User(email=email, password_hash=generate_password_hash(password, method='sha512'))
+    admin_user = User(email=email, password_hash=generate_password_hash(password))
     db.session.add(admin_user)
     db.session.commit()
     flash("Admin created successfully!", "success")
