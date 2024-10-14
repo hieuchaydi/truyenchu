@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Gửi tin nhắn</h2>
-<form method="POST" action="{{ url_for('send_message') }}">
+<form method="POST" action="{{ url_for('main.send_message') }}">
     <label for="recipient">Người nhận (Email):</label>
     <input type="email" name="recipient" id="recipient" required>
 
@@ -13,4 +13,12 @@
 
     <button type="submit">Gửi</button>
 </form>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 {% endblock %}

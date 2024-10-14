@@ -1,8 +1,75 @@
-/* Modal Styles */
 body {
-    font-family: Arial, sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease, opacity 0.5s ease;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
 }
+
+/* Navbar */
+.navbar {
+    padding: 1rem; /* Tăng độ dày cho thanh điều hướng */
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    padding-right: 1.5rem;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107;
+}
+
+/* Facebook Icon */
+.navbar-nav .nav-link i {
+    font-size: 1.2rem; /* Kích thước biểu tượng Facebook */
+    color: #fff; /* Màu sắc biểu tượng Facebook */
+}
+
+.navbar-nav .nav-link:hover i {
+    color: #ffc107; /* Màu khi di chuột qua biểu tượng Facebook */
+}
+
+/* Buttons */
+.btn-custom {
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #e0a800;
+}
+
+/* Main Content */
+main {
+    min-height: 70vh;
+    padding-top: 2rem;
+}
+
+/* Footer */
+footer {
+    background-color: transparent; /* Remove the background color */
+    padding: 1rem 0; /* Keep padding if needed */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #ffc107;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -36,36 +103,19 @@ body.dark-mode .modal-content {
     display: flex;
 }
 
-.modal-header, .modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.modal-header,
 
 .modal-header h2 {
     margin: 0;
     font-size: 24px;
 }
 
-.modal-footer button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
+
 
 .modal-footer button:hover {
     background-color: #0056b3;
 }
 
-body.dark-mode .modal-footer button {
-    background-color: #444;
-}
-
-body.dark-mode .modal-footer button:hover {
-    background-color: #666;
-}
 
 /* Tooltip Styles */
 .tooltip {
@@ -166,13 +216,25 @@ body.dark-mode .toast {
 }
 
 @keyframes fadein {
-    from { bottom: 0; opacity: 0; }
-    to { bottom: 30px; opacity: 1; }
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
 
 @keyframes fadeout {
-    from { bottom: 30px; opacity: 1; }
-    to { bottom: 0; opacity: 0; }
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
 
 /* Avatar Styles */
@@ -206,11 +268,13 @@ body.dark-mode .accordion {
     color: #f1f1f1;
 }
 
-.active, .accordion:hover {
+.active,
+.accordion:hover {
     background-color: #ccc;
 }
 
-body.dark-mode .accordion.active, body.dark-mode .accordion:hover {
+body.dark-mode .accordion.active,
+body.dark-mode .accordion:hover {
     background-color: #444;
 }
 
@@ -373,6 +437,7 @@ body.dark-mode .pagination .active a {
 body.dark-mode .divider {
     background-color: #444;
 }
+
 /* User Page Styles */
 .user-page {
     max-width: 800px;
@@ -422,100 +487,59 @@ body.dark-mode .user-options li a:hover {
     background-color: #0056b3;
     color: #fff;
 }
+
 /* General Form Styles */
-.form-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+/* Form Container */
+form {
+    max-width: 600px; /* Đặt chiều rộng tối đa cho form */
+    margin: 0 auto; /* Căn giữa form */
+    padding: 20px; /* Thêm khoảng cách bên trong */
+    background-color: #fff; /* Màu nền trắng */
+    border-radius: 8px; /* Bo góc cho form */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Đổ bóng cho form */
 }
 
-.form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: 500;
+/* Labels */
+form label {
+    font-size: 16px; /* Kích thước chữ cho nhãn */
+    font-weight: 600; /* Đậm chữ */
+    margin-bottom: 5px; /* Khoảng cách dưới nhãn */
+    display: block; /* Hiển thị dưới dạng khối */
 }
 
-body.dark-mode .form-container {
-    background-color: #333;
-    color: #fff;
+/* Input and Textarea */
+form input[type="text"],
+form textarea {
+    width: 100%; /* Chiều rộng 100% */
+    padding: 10px; /* Khoảng cách bên trong */
+    border-radius: 4px; /* Bo góc */
+    border: 1px solid #ccc; /* Viền xám */
+    margin-bottom: 15px; /* Khoảng cách dưới input */
+    font-size: 14px; /* Kích thước chữ */
+    transition: border-color 0.3s ease; /* Hiệu ứng chuyển tiếp cho viền */
 }
 
-.form-group {
-    margin-bottom: 20px;
+/* Input Focus Effect */
+form input[type="text"]:focus,
+form textarea:focus {
+    border-color: #007bff; /* Màu viền khi focus */
 }
 
-.form-group label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #444;
-    display: block;
-    margin-bottom: 5px;
+/* Submit Button */
+form button {
+    padding: 10px 15px; /* Khoảng cách bên trong */
+    font-size: 16px; /* Kích thước chữ */
+    border-radius: 4px; /* Bo góc */
+    border: none; /* Không viền */
+    background-color: #007bff; /* Màu nền nút */
+    color: white; /* Màu chữ nút */
+    cursor: pointer; /* Con trỏ chuột khi di chuột qua nút */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển tiếp cho nút */
 }
 
-body.dark-mode .form-group label {
-    color: #f1f1f1;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    transition: border-color 0.3s ease;
-}
-
-body.dark-mode .form-group input {
-    background-color: #555;
-    border: 1px solid #444;
-    color: #fff;
-}
-
-.form-group input:focus {
-    border-color: #007bff;
-}
-
-.form-group button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    transition: background-color 0.3s ease;
-}
-
-body.dark-mode .form-group button {
-    background-color: #444;
-}
-
-.form-group button:hover {
-    background-color: #0056b3;
-}
-
-body.dark-mode .form-group button:hover {
-    background-color: #666;
-}
-
-/* Links for login/register */
-.form-link {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.form-link a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.form-link a:hover {
-    text-decoration: underline;
+/* Button Hover Effect */
+form button:hover {
+    background-color: #0056b3; /* Màu nền khi di chuột qua nút */
 }
 
 body.dark-mode .form-link a {
@@ -524,4 +548,52 @@ body.dark-mode .form-link a {
 
 body.dark-mode .form-link a:hover {
     color: #fff;
+}
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Màu nền cho form */
+    border-radius: 8px; /* Bo góc cho form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng cho form */
+}
+
+.form-container h1, .form-container h2 {
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+label {
+    display: block; /* Hiển thị label thành block */
+    margin-bottom: 8px; /* Khoảng cách dưới label */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Khoảng cách dưới input */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Bo góc cho input */
+    transition: border-color 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Đổi màu viền khi focus */
+    outline: none; /* Xóa outline khi focus */
+}
+
+.form-link {
+    text-align: center; /* Căn giữa cho liên kết */
+    margin-top: 15px; /* Khoảng cách trên liên kết */
+}
+
+ul {
+    list-style-type: none; /* Xóa kiểu danh sách */
+    padding: 0; /* Xóa padding */
+    margin: 10px 0; /* Khoảng cách trên dưới */
+}
+
+ul li {
+    margin: 5px 0; /* Khoảng cách giữa các thông báo */
 }

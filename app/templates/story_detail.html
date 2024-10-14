@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ story.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ story.title }}</h1>
+<p>Đăng bởi {{ story.author.email }} vào {{ story.date_posted.strftime('%Y-%m-%d') }}</p> <!-- Thay 'user.name' bằng 'author.email' -->
+<p>{{ story.content }}</p>
+
+<h3>Bình luận</h3>
+{% for comment in comments %}
+    <div class="comment">
+        <p><strong>{{ comment.author.email }}</strong>: {{ comment.content }}</p> <!-- Thay 'user.name' bằng 'author.email' -->
+        <p>Được đăng vào {{ comment.date_posted.strftime('%Y-%m-%d %H:%M') }}</p>
+    </div>
+{% else %}
+    <p>Không có bình luận.</p>
+{% endfor %}
+
+{% if 'user' in session %}
+<h4>Thêm bình luận:</h4>
+<form method="POST" action="{{ url_for('main.add_comment', story_id=story.story_id) }}">
+    <textarea name="content" required></textarea>
+    <button type="submit">Đăng</button>
+</form>
+{% else %}
+<p>Bạn cần phải đăng nhập <a href="{{ url_for('main.login') }}">để đăng nhập</a> để bình luận.</p>
+{% endif %}
+
+{% endblock %}

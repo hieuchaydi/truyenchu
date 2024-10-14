@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng Nhập{% endblock %}
+
+{% block content %}
+<h1>Đăng Nhập</h1>
+<form method="POST">
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <br>
+    <label>Mật Khẩu:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit" class="btn btn-custom">Đăng Nhập</button>
+</form>
+
+<!-- Nút Đăng ký tài khoản mới -->
+<div class="text-center mt-4">
+    <a href="{{ url_for('main.register') }}" class="btn btn-secondary">Đăng ký tài khoản mới</a>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% endblock %}

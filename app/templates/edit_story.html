@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Chỉnh Sửa Câu Chuyện{% endblock %}
+
+{% block content %}
+<h1>Chỉnh Sửa Câu Chuyện</h1>
+<form method="POST">
+    <label>Tiêu Đề:</label>
+    <input type="text" name="title" value="{{ story.title }}" required>
+    <br>
+    <label>Nội Dung:</label>
+    <textarea name="content" required>{{ story.content }}</textarea>
+    <br>
+    <button type="submit">Cập Nhật</button>
+</form>
+{% endblock %}

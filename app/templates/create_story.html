@@ -3,9 +3,9 @@
 {% block title %}Đăng truyện mới{% endblock %}
 
 {% block content %}
-<h2>Đăng Truyện</h2>
+<h2>Đăng Truyện Mới</h2>
 
-<form method="POST" action="{{ url_for('blog') }}">
+<form method="POST" action="{{ url_for('main.create_story') }}">
     <label for="title">Tên truyện:</label>
     <input type="text" name="title" id="title" required>
 
@@ -15,5 +15,5 @@
     <button type="submit">Đăng</button>
 </form>
 
-<a href="{{ url_for('home') }}">Trở lại </a>
+<a href="{{ url_for('home') }}">Trở lại trang chủ</a>
 {% endblock %}

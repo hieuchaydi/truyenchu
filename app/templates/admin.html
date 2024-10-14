@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Trang Quản Trị{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Trang Quản Trị</h1>
+
+    <h2>Quản lý người dùng</h2>
+
+    {% if users %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Trạng Thái</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ 'Kích hoạt' if user.is_active else 'Không kích hoạt' }}</td>
+                <td>
+                    <a href="{{ url_for('admin.activate_user', user_id=user.user_id) }}" class="btn btn-success">Kích hoạt</a>
+                    <a href="{{ url_for('admin.deactivate_user', user_id=user.user_id) }}" class="btn btn-warning">Không kích hoạt</a>
+                    <a href="{{ url_for('admin.delete_user', user_id=user.user_id) }}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Không có người dùng nào.</p>
+    {% endif %}
+
+    <h2>Quản lý câu chuyện</h2>
+
+    {% if stories %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tiêu Đề</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for story in stories %}
+            <tr>
+                <td>{{ story.title }}</td>
+                <td>
+                    <a href="{{ url_for('admin.edit_story', story_id=story.story_id) }}" class="btn btn-primary">Sửa</a>
+                    <a href="{{ url_for('admin.delete_story', story_id=story.story_id) }}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa câu chuyện này?');">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Không có câu chuyện nào.</p>
+    {% endif %}
+</div>
+{% endblock %}

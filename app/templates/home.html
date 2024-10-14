@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Trang Chủ{% endblock %}
+
+{% block content %}
+<h1>Chào mừng đến với Blog của chúng tôi!</h1>
+<h2>Các câu chuyện</h2>
+
+{% for story in stories %}
+    <h3><a href="{{ url_for('main.story_detail', story_id=story.story_id) }}">{{ story.title }}</a></h3>
+    <p>Đăng bởi {{ story.author.email }} vào {{ story.date_posted.strftime('%Y-%m-%d') }}</p> <!-- Thay 'user.name' bằng 'author.email' -->
+{% else %}
+    <p>Chưa có câu chuyện nào.</p>
+{% endfor %}
+
+{% if 'user' in session %}
+    <p><a href="{{ url_for('main.blog') }}">Đăng câu chuyện mới</a></p>
+    <p><a href="{{ url_for('main.logout') }}">Đăng xuất</a></p>
+{% else %}
+    <p><a href="{{ url_for('main.login') }}">Đăng nhập</a> hoặc <a href="{{ url_for('main.register') }}">Đăng ký</a></p>
+{% endif %}
+{% endblock %}

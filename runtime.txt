@@ -1,4 +1,0 @@
-python-3.10.13
-git add runtime.txt
-git commit -m "Downgrade Python version to 3.10"
-git push heroku main

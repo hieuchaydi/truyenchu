@@ -1,33 +1,35 @@
 truyenchu/
 │
-├── app.py
-│
+├── app/
+│   ├── __init__.py          
+│   ├── models.py            
+│   ├── routes.py            
+│   ├── forms.py             
+│   ├── static/              
+│   │   ├── style.css
+│   │   └── script.js
+│   └── templates/           
+│       ├── admin.html
+        ├── base.html
+        ├── blog.html
+        ├── contact.html
+        ├── create_story.html
+        ├── edit_story.html
+        ├── error.html
+        ├── home.html
+        ├── login.html
+        ├── logout.html
+        ├── manage_users.html
+        ├── register.html
+        ├── story_details.html
+        ├── user.html
 │
 ├── instance/
-│   └── user.db
+│   └── user.db              
 │
-├── static/
-│   ├── script.js
-│   └── style.css
-│
-├── ├emplates/
-        admin.html
-        base.html
-        blog.html
-        contact.html
-        create_story.html
-        edit_story.html
-        error.html
-        home.html
-        login.html
-        logout.html
-        manage_users.html
-        register.html
-        story_details.html
-        user.html                  # Các template HTML
+├── config.py                
+├── run.py                   
+├── .gitignore               
+├── requirements.txt        
 
-│
-├── requirements.txt
-├── runtime.txt
-└── .gitignore
 

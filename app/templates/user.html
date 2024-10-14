@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Người dùng{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Xin chào, {{ username }}</h2>
+
+<ul class="user-options list-unstyled">
+    <li><a href="{{ url_for('main.blog') }}" class="btn btn-custom">Thêm truyện</a></li>
+    <li><a href="{{ url_for('main.send_message') }}" class="btn btn-custom">Gửi tin nhắn</a></li>
+    <li><a href="{{ url_for('main.contact') }}" class="btn btn-custom">Liên hệ hỗ trợ</a></li>
+    <li><a href="{{ url_for('main.change_password') }}" class="btn btn-custom">Đổi mật khẩu</a></li>
+    <li><a href="{{ url_for('main.caro') }}" class="btn btn-custom">Game</a></li>
+</ul>
+
+<!-- Logout Button -->
+<div class="text-center mt-4">
+    <a href="{{ url_for('main.logout') }}" class="btn btn-danger">Đăng xuất</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

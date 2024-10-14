@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Quản lý Người dùng{% endblock %}
+
+{% block content %}
+<h2>Quản lý Người dùng</h2>
+
+{% if users %}
+<table>
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ "Đang hoạt động" if user.is_active else "Đã vô hiệu hóa" }}</td>
+            <td>
+                {% if user.is_active %}
+                    <a href="{{ url_for('admin.deactivate_user', user_id=user.user_id) }}" class="btn btn-warning">Vô hiệu hóa</a>
+                {% else %}
+                    <a href="{{ url_for('admin.activate_user', user_id=user.user_id) }}" class="btn btn-success">Kích hoạt</a>
+                {% endif %}
+                <a href="{{ url_for('admin.delete_user', user_id=user.user_id) }}" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')">Xóa</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Không có người dùng nào.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Tin Nhắn{% endblock %}
+
+{% block content %}
+<h2>Tin Nhắn Của Bạn</h2>
+
+<h3>Tin Nhắn Đã Gửi:</h3>
+<ul>
+    {% for message in sent_messages %}
+    <li>
+        <strong>Gửi đến:</strong> {{ message.recipient.email }}<br>
+        <strong>Nội dung:</strong> {{ message.content }}<br>
+        <strong>Thời gian:</strong> {{ message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+    </li>
+    {% else %}
+    <li>Chưa có tin nhắn nào đã gửi.</li>
+    {% endfor %}
+</ul>
+
+<h3>Tin Nhắn Đã Nhận:</h3>
+<ul>
+    {% for message in received_messages %}
+    <li>
+        <strong>Từ:</strong> {{ message.sender.email }}<br>
+        <strong>Nội dung:</strong> {{ message.content }}<br>
+        <strong>Thời gian:</strong> {{ message.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+    </li>
+    {% else %}
+    <li>Chưa có tin nhắn nào đã nhận.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.send_message') }}">Gửi tin nhắn mới</a>
+{% endblock %}
