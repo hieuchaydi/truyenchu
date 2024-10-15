@@ -11,12 +11,15 @@
     <label>Mật Khẩu:</label>
     <input type="password" name="password" required>
     <br>
+    <label>Xác Nhận Mật Khẩu:</label> <!-- Added confirmation password field -->
+    <input type="password" name="confirm_password" required>
+    <br>
     <button type="submit">Đăng Ký</button>
 </form>
 
-<p>Đã có tài khoản? <a href="{{ url_for('main.login') }}"class="btn btn-secondary">Đăng nhập ngay</a></p>
+<p>Đã có tài khoản? <a href="{{ url_for('main.login') }}" class="btn btn-secondary">Đăng nhập ngay</a></p>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
+{% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
         <ul>
             {% for category, message in messages %}
