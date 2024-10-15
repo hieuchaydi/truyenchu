@@ -9,5 +9,5 @@ if __name__ == "__main__":
     
     with app.app_context():
         db.create_all()  # Tạo tất cả các bảng trong cơ sở dữ liệu
-    app.run(debug=False)
+    app.run(debug=True)
 #gunicorn 'app:create_app()' --bind 0.0.0.0:$PORT w
