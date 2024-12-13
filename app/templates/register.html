@@ -1,18 +1,20 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Đăng Ký Tài Khoản{% endblock %}
 
 {% block content %}
 <h1>Đăng Ký Tài Khoản</h1>
-<form method="POST">
-    <label>Email:</label>
-    <input type="email" name="email" required>
+<form method="POST" id="register-form">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <div id="email-feedback" style="color: red;"></div> <!-- Display feedback for email -->
+
     <br>
-    <label>Mật Khẩu:</label>
-    <input type="password" name="password" required>
+    <label for="password">Mật Khẩu:</label>
+    <input type="password" id="password" name="password" required>
     <br>
-    <label>Xác Nhận Mật Khẩu:</label> <!-- Added confirmation password field -->
-    <input type="password" name="confirm_password" required>
+    <label for="confirm_password">Xác Nhận Mật Khẩu:</label> 
+    <input type="password" id="confirm_password" name="confirm_password" required>
     <br>
     <button type="submit">Đăng Ký</button>
 </form>
@@ -28,4 +30,28 @@
         </ul>
     {% endif %}
 {% endwith %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery library -->
+<script>
+    $(document).ready(function() {
+        // Check if email exists on input
+        $('#email').on('input', function() {
+            var email = $(this).val(); // Get email input value
+            $.ajax({
+                url: '/check_email',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ email: email }), // Send email to server
+                success: function(response) {
+                    // Check if email exists
+                    if (response.exists) {
+                        $('#email-feedback').text('Email đã được đăng ký!');
+                    } else {
+                        $('#email-feedback').text('Email có thể đăng ký');
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}
