@@ -37,7 +37,7 @@ def login():
         password = request.form.get("password")
 
         user = User.query.filter_by(email=email).first()
-        if user and user.check_password(password) and user.is_active:
+        if user and check_password_hash(user.password_hash, password) and user.is_active:
             session.permanent = True  # Đặt phiên làm việc là vĩnh viễn
             session["user"] = user.email  # Lưu email vào phiên làm việc
             session["is_admin"] = (user.email == "admin@gmail.com")  # Lưu trạng thái admin dựa trên email
@@ -46,7 +46,7 @@ def login():
         flash("Thông tin đăng nhập không hợp lệ hoặc tài khoản đã bị vô hiệu hóa", "danger")
         return redirect(url_for("main.login"))  # Sử dụng prefix Blueprint
 
-    return render_template("login.html")
+    return render_template("login.html") # Updated to use the Blueprint prefix
 
 # Đăng ký
 @main.route("/register", methods=["GET", "POST"])
