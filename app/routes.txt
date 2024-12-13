@@ -1,4 +1,3 @@
-
 from mailbox import Message
 from sys import path
 from flask import Blueprint, app, render_template, redirect, url_for, session, flash, request
