@@ -23,8 +23,6 @@ admin = Blueprint('admin', __name__)
 
 
 
-
-
 # Trang chủ
 @main.route("/")
 def home():
