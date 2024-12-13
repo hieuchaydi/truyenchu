@@ -1,30 +1,21 @@
 from mailbox import Message
 from sys import path
-from flask import Blueprint, app, render_template, redirect, url_for, session, flash, request
-from flask_login import login_user
-from config import Config
+from flask import Blueprint, app, jsonify, render_template, redirect, url_for, session, flash, request
 from .models import Story, Comment, User
 from . import db
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import HTTPException
-from flask import request, jsonify
-
 
 main = Blueprint('main', __name__)
 admin = Blueprint('admin', __name__)
 
-
-
-
-
-
-# Trang chủ
+# Home Route
 @main.route("/")
 def home():
-    stories = Story.query.all()
+    stories = Story.query.all()  # Get all stories
     return render_template("home.html", stories=stories)
 
-# Đăng nhập
+# Login Route
 @main.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -43,49 +34,6 @@ def login():
 
     return render_template("login.html") # Updated to use the Blueprint prefix
 
-# Đăng ký
-@main.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
-
-        # Validate email format
-        if not email or "@" not in email:
-            flash("Địa chỉ email không hợp lệ.", "danger")
-            return redirect(url_for("main.register"))
-
-        # Check if the email already exists
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash("Email đã được đăng ký.", "warning")
-            return redirect(url_for("main.register"))
-
-        # Check if the passwords match
-        if password != confirm_password:
-            flash("Mật khẩu không khớp.", "danger")
-            return redirect(url_for("main.register"))
-
-        try:
-            # Create a new user
-            new_user = User(email=email)
-            new_user.set_password(password)  # Assuming you have a method to hash the password
-            db.session.add(new_user)
-            db.session.commit()
-
-            flash("Đăng ký thành công! Vui lòng đăng nhập.", "success")
-            return redirect(url_for("main.login"))
-        except Exception as e:
-            db.session.rollback()
-            flash("Đăng ký thất bại. Vui lòng thử lại.", "danger")
-            print(f"Error during registration: {e}")
-            # Optional: Log the error for better debugging
-            app.logger.error(f"Error during registration: {e}")
-
-    return render_template("register.html")
-
-
 @main.route("/check_email", methods=["POST"])
 def check_email():
     # Get the email from the request data
@@ -100,6 +48,44 @@ def check_email():
     else:
         return jsonify({"exists": False})
 
+@main.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")  # Get confirmation password
+
+        # Basic email validation
+        if not email or "@" not in email:
+            flash("Địa chỉ email không hợp lệ.", "danger")  # Invalid email address
+            return redirect(url_for("main.register"))
+
+        # Check if user already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email đã được đăng ký.", "warning")  # Email has already been registered
+            return redirect(url_for("main.register"))
+
+        # Check if passwords match
+        if password != confirm_password:
+            flash("Mật khẩu không khớp.", "danger")  # Passwords do not match
+            return redirect(url_for("main.register"))
+
+        # Hash the password before saving
+        try:
+            new_user = User(email=email, password=password)  # Assuming password hashing is done in the User model
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Đăng ký thành công! Vui lòng đăng nhập.", "success")  # Registration successful
+            return redirect(url_for("main.login"))
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            flash("Đăng ký thất bại. Vui lòng thử lại.", "danger")  # Registration failed
+            print(f"Error during registration: {e}")  # Log the error for debugging
+
+    return render_template("register.html")
+
+
 # User Dashboard Route
 @main.route("/user")
 def user():
@@ -113,8 +99,8 @@ def user():
 def logout():
     session.pop("user", None)
     session.pop("is_admin", None)  # Remove admin info on logout
-    flash("Bạn đã đăng xuất.", "info")
-    return redirect(url_for("main.login"))
+    flash("You have been logged out.", "info")
+    return redirect(url_for("main.login"))  # Updated to use the Blueprint prefix
 
 # Blog Creation Route
 @main.route("/blog", methods=["GET", "POST"])
@@ -347,8 +333,7 @@ def send_message():
         return render_template("send_message.html")
     return redirect(url_for("main.login"))  # Redirect nếu người dùng không đăng nhập
 
-# Messages Route
-# Messages Route
+
 @main.route("/messages", methods=["GET"])
 def messages():
     if "user" in session:
@@ -394,4 +379,4 @@ if __name__ == "__main__":
         with app.app_context():
             db.create_all()  # Create all tables
     app.run(debug=True)
-
+    
