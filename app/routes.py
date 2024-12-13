@@ -81,7 +81,7 @@ def register():
         except Exception as e:
             db.session.rollback()  # Rollback in case of error
             flash("Đăng ký thất bại. Vui lòng thử lại.", "danger")  # Registration failed
-            print(f"Error during registration: {e}")  # Log the error for debugging
+            #print(f"lỗi ở: {e}")  # Log the error for debugging
 
     return render_template("register.html")
 
@@ -99,7 +99,7 @@ def user():
 def logout():
     session.pop("user", None)
     session.pop("is_admin", None)  # Remove admin info on logout
-    flash("You have been logged out.", "info")
+    flash("Bạn đã đăng xuất.", "info")
     return redirect(url_for("main.login"))  # Updated to use the Blueprint prefix
 
 # Blog Creation Route
@@ -115,7 +115,7 @@ def blog():
                 new_story = Story(title=title, content=content, user_id=user.user_id)
                 db.session.add(new_story)
                 db.session.commit()
-                flash("Story posted successfully.", "success")
+                flash("Đăng tin thành công.", "success")
                 return redirect(url_for("main.home"))  # Updated to use the Blueprint prefix
             flash("User not found.", "danger")
             return redirect(url_for("main.login"))  # Updated to use the Blueprint prefix
@@ -142,7 +142,7 @@ def add_comment(story_id):
             new_comment = Comment(content=content, story_id=story_id, user_id=user.user_id)
             db.session.add(new_comment)
             db.session.commit()
-            flash("Comment added successfully.", "success")
+            flash("Bình luận của bạn đã được đăng.", "success")
         else:
             flash("User not found.", "danger")
         
@@ -157,7 +157,7 @@ def admin_page():
         stories = Story.query.all()
         return render_template("admin.html", users=users, stories=stories)
 
-    flash("You need to be an admin to access this page.", "danger")
+    flash("Bạn không có quyền này.", "danger")
     return redirect(url_for("main.login"))
 
 # Route cho quản lý người dùng
@@ -168,7 +168,7 @@ def manage_users():
         users = User.query.all()
         return render_template("manage_users.html", users=users)
 
-    flash("You need to be an admin to access this page.", "danger")
+    flash("không thể truy cập.", "danger")
     return redirect(url_for("main.login"))
 
 # Route kích hoạt người dùng
@@ -179,10 +179,9 @@ def activate_user(user_id):
         user = User.query.get_or_404(user_id)
         user.is_active = True
         db.session.commit()
-        flash("User activated successfully.", "success")
+        flash("Tài khoản đã được tạo.", "success")
         return redirect(url_for("admin.manage_users"))
 
-    flash("You need to be an admin to access this page.", "danger")
     return redirect(url_for("main.login"))
 
 # Route vô hiệu hóa người dùng
@@ -193,10 +192,8 @@ def deactivate_user(user_id):
         user = User.query.get_or_404(user_id)
         user.is_active = False
         db.session.commit()
-        flash("User deactivated successfully.", "success")
+        flash("tài khoản không được kích hoạt.", "success")
         return redirect(url_for("admin.manage_users"))
-
-    flash("You need to be an admin to access this page.", "danger")
     return redirect(url_for("main.login"))
 
 # Route xóa người dùng
@@ -207,10 +204,10 @@ def delete_user(user_id):
         user = User.query.get_or_404(user_id)
         db.session.delete(user)
         db.session.commit()
-        flash("User deleted successfully.", "success")
+        flash("Xóa tài khoản thành công.", "success")
         return redirect(url_for("admin.manage_users"))
 
-    flash("You need to be an admin to access this page.", "danger")
+    flash("Bạn không có quyền này.", "danger")
     return redirect(url_for("main.login"))
 
 # Route cho chỉnh sửa câu chuyện
@@ -243,7 +240,7 @@ def delete_story(story_id):
         flash("Story deleted successfully.", "success")
         return redirect(url_for("admin.admin_page"))
 
-    flash("You need to be an admin to access this page.", "danger")
+    flash("Bạn không có quyền này.", "danger")
     return redirect(url_for("main.login"))
 
 # Route tạo admin
@@ -251,7 +248,6 @@ def delete_story(story_id):
 def create_admin():
     """Admin can create a new admin."""
     if "user" not in session or not session.get("is_admin"):
-        flash("You need to be an admin to create another admin.", "danger")
         return redirect(url_for("main.login"))
 
     email = "admin@gmail.com"
@@ -264,7 +260,7 @@ def create_admin():
     admin_user = User(email=email, password_hash=generate_password_hash(password))
     db.session.add(admin_user)
     db.session.commit()
-    flash("Admin created successfully!", "success")
+    flash("Tạo tài khoản thành công!", "success")
     return redirect(url_for("admin.admin_page"))
 
 # Route đăng nhập
@@ -279,10 +275,10 @@ def login():
         if user and check_password_hash(user.password_hash, password):  # Sửa ở đây
             session["user"] = user.email
             session["is_admin"] = user.is_admin
-            flash("Logged in successfully.", "success")
+            flash("Đăng nhập thành công", "success")
             return redirect(url_for("admin.admin_page"))
 
-        flash("Login failed. Check your email and password.", "danger")
+        flash("đăng nhập thất bạn kiểm tra lại tài khoản và mật khẩu.", "danger")
 
     return render_template("login.html")
 
@@ -293,7 +289,7 @@ def logout():
     """User logout."""
     session.pop("user", None)
     session.pop("is_admin", None)
-    flash("Logged out successfully.", "success")
+    flash("Đăng xuất thành công.", "success")
     return redirect(url_for("main.login")) # Updated to use the Blueprint prefix
 
 # Contact Route
@@ -347,7 +343,7 @@ def messages():
                                    sent_messages=sent_messages, 
                                    received_messages=received_messages)
         else:
-            flash("User not found.", "danger")
+            flash("Không tìm thấy tài khoản.", "danger")
             return redirect(url_for("main.login"))
     return redirect(url_for("main.login"))
 @main.route('/change-password', methods=['GET', 'POST'])
@@ -367,9 +363,9 @@ def change_password():
                 flash("Password changed successfully.", "success")
                 return redirect(url_for('main.user'))  # Redirect đến trang người dùng
             else:
-                flash("New passwords do not match.", "danger")
+                flash("Mật khẩu mới không khớp.", "danger")
         else:
-            flash("Current password is incorrect.", "danger")
+            flash("kiểm tra lại mật khẩu.", "danger")
 
     return render_template('change_password.html')
 
