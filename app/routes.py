@@ -2,18 +2,13 @@ from mailbox import Message
 from sys import path
 from flask import Blueprint, app, render_template, redirect, url_for, session, flash, request
 from flask_login import login_user
-from requests_oauthlib import OAuth1
-from authlib.integrations.flask_client import OAuth
 from config import Config
 from .models import Story, Comment, User
 from . import db
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import HTTPException
-from flask_dance.contrib.github import make_github_blueprint, github
-
 from flask import request, jsonify
-from . import db
-from .models import User
+
 
 main = Blueprint('main', __name__)
 admin = Blueprint('admin', __name__)
