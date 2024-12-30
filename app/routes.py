@@ -33,7 +33,7 @@ def login():
         return redirect(url_for("main.login"))  # Sử dụng prefix Blueprint
 
     return render_template("login.html") # Updated to use the Blueprint prefix
-
+#check email ton tai hay chua
 @main.route("/check_email", methods=["POST"])
 def check_email():
     # Get the email from the request data
