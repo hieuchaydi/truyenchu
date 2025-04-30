@@ -1,6 +1,6 @@
 # 📚 Truyện Chữ - Ứng dụng đọc truyện trực tuyến bằng Flask
 
-**[🌐 Truy cập website](https://truyenchu.onrender.com)**
+**🌐 Truy cập website tại: [https://truyenchu.onrender.com](https://truyenchu.onrender.com)**
 
 Đây là một ứng dụng web đọc truyện chữ được xây dựng với **Flask**. Người dùng có thể đăng ký, đăng nhập (bằng tài khoản hoặc GitHub), tạo và quản lý truyện, đọc truyện, và phân quyền quản trị. Ứng dụng được triển khai trên Render.
 
@@ -49,7 +49,7 @@ Do Render không lưu dữ liệu session/database nội bộ miễn phí, đăn
 
 - Python Flask
 - Flask-Login, Flask-OAuth (GitHub login)
-- SQLite 
+- SQLite / MySQL
 - HTML/CSS (Jinja2 template)
 - Triển khai trên Render.com
 
