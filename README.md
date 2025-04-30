@@ -49,7 +49,7 @@ Do Render không lưu dữ liệu session/database nội bộ miễn phí, đăn
 
 - Python Flask
 - Flask-Login, Flask-OAuth (GitHub login)
-- SQLite / MySQL
+- SQLite 
 - HTML/CSS (Jinja2 template)
 - Triển khai trên Render.com
 
