@@ -9,7 +9,7 @@
 ## 🚫 Lưu ý khi đăng nhập GitHub
 
 Do Render không lưu dữ liệu session/database nội bộ miễn phí, đăng nhập GitHub có thể gây lỗi và không lưu được dữ liệu người dùng.
-
+cấu hình trên render phần gunicorn cần cấu hình như trên dể triển khai trên render.com :gunicorn 'app:create_app()' --bind 0.0.0.0:$PORT
 ---
 
 ## ⚙️ Tính năng nổi bật
