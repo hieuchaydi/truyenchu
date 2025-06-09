@@ -9,7 +9,7 @@
 ## 🚫 Lưu ý khi đăng nhập GitHub
 
 Do Render không lưu dữ liệu session/database nội bộ miễn phí, đăng nhập GitHub có thể gây lỗi và không lưu được dữ liệu người dùng.
-cấu hình trên render phần gunicorn cần cấu hình như trên dể triển khai trên render.com :gunicorn 'app:create_app()' --bind 0.0.0.0:$PORT
+
 ---
 
 ## ⚙️ Tính năng nổi bật
@@ -52,8 +52,17 @@ cấu hình trên render phần gunicorn cần cấu hình như trên dể tri�
 - SQLite 
 - HTML/CSS (Jinja2 template)
 - Triển khai trên Render.com
-
+- cấu hình trên render phần gunicorn cần cấu hình như trên dể triển khai trên render.com :gunicorn 'app:create_app()' --bind 0.0.0.0:$PORT
 ---
+## 📖 Documentation & References
+
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Python Documentation](https://docs.python.org/)
+- [HTML Reference](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [Bootstrap Documentation](https://getbootstrap.com/)
+
 
 ## 🤝 Đóng góp & phản hồi
 
